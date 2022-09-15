@@ -5,7 +5,7 @@ import com.xworkz.touristplace.exception.TouristPlaceValidException;
 
 public class TouristPlaceServiceImpl implements TouristPlaceService {
 
-	TouristPlaceDAO touristPlaceDAO;
+	private TouristPlaceDAO touristPlaceDAO;
 
 	public TouristPlaceServiceImpl(TouristPlaceDAO touristPlaceDAO) {
 		this.touristPlaceDAO = touristPlaceDAO;
@@ -20,15 +20,15 @@ public class TouristPlaceServiceImpl implements TouristPlaceService {
 
 			} else {
 				System.err.println("Place name is not present");
-
+				this.touristPlaceDAO.save(place);
+				return true;
 			}
 
 		} else {
 			System.err.println("place is not present");
 			throw new TouristPlaceValidException("not valid");
 		}
-
-		return false;
 	}
+
 
 }

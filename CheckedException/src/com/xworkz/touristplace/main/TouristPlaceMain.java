@@ -11,25 +11,24 @@ public class TouristPlaceMain {
 	public static void main(String[] args) {
 
 		TouristPlaceDAO touristPlace = new TouristPlaceDAOImpl();
-
-		touristPlace.save("Mysore Palace");
-		touristPlace.save("Mysore Zoo");
-		touristPlace.save("KRS");
-		touristPlace.save("Chamundi Hill");
-		touristPlace.save("Karnal Karagruh");
-		touristPlace.save("GolGumbaz");
-		touristPlace.save("Badam");
-		touristPlace.save("Lalbagh Botanical Garden");
-		touristPlace.save("Iskan Temple");
-		touristPlace.save("Cubbon Park");
-		
+	
 		TouristPlaceService tps = new TouristPlaceServiceImpl(touristPlace);
 
 		try {
 			tps.checkAndValidate("Lalbagh Botanical Garden");
+			tps.checkAndValidate("Mysore Palace");
+			tps.checkAndValidate("Mysore Zoo");
+			tps.checkAndValidate("KRS");
+			tps.checkAndValidate("Chamundi Hill");
+			tps.checkAndValidate("Karnal Karagruh");
+			tps.checkAndValidate("GolGumbaz");
+			tps.checkAndValidate("Badam");
+			tps.checkAndValidate("Iskan Temple");
+			tps.checkAndValidate("Cubbon Park");
 
 		} catch (TouristPlaceValidException exp) {
-			System.err.println("===");
+			System.out.println(exp.getMessage());
+			System.out.println(exp.getClass());
 
 		}
 

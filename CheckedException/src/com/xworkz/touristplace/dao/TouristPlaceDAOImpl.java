@@ -10,19 +10,16 @@ public class TouristPlaceDAOImpl implements TouristPlaceDAO {
 		this.dataStore[index] = place;
 		System.out.println("dataStored:" + place + "index" + this.index);
 		this.index++;
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean checkName(String place) {
-		for (String ref : this.dataStore) {
+		for (String ref : this.dataStore) 
 			if (ref != null && ref.equals(place)) {
 				System.out.println("Place is checked");
-				boolean refe = this.save(place);
-				return refe;
+				return true;
 			}
-
-		}
 		return false;
 	}
 
