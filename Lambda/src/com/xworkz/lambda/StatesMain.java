@@ -52,9 +52,9 @@ public class StatesMain {
 		list.stream().forEach((lis)->System.out.println(new StringBuffer().append(lis).reverse()));
 		System.out.println("====================");
 		
-		list.stream().distinct().forEach((lis)->System.out.println(lis));
-		
-		/*long sts=list.stream().count();
-		System.out.println("Total States : "+ sts);*/	
+		list.stream().forEach((lis)->System.out.println(lis));
+		System.out.println("====================");
+		long sts=list.stream().count();
+		System.out.println("Total States : "+ sts);
 	}
 }
