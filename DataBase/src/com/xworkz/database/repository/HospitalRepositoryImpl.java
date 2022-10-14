@@ -11,6 +11,15 @@ public class HospitalRepositoryImpl implements HospitalRepository {
 	@Override
 	public boolean save(HospitalDTO dto) {
 		System.out.println("Running repository");
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver"); //load the Driver
+			//com.mysql.cj.jdbc.Driver-->this is FQN given by vendor
+			//which is surrounded by try catch
+			System.out.println("Sql running");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
 		return true;
 	}
 
