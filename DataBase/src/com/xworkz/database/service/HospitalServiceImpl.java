@@ -18,7 +18,7 @@ public class HospitalServiceImpl implements HospitalService {
 		String specialist=dto.getSpecialist();
 		int since=dto.getSince();
 		
-		if(id>0 && id<20)
+		if(id>0 && id<30)
 		{
 			System.out.println("id is valid");
 			
@@ -26,7 +26,7 @@ public class HospitalServiceImpl implements HospitalService {
 			{
 				System.out.println("founder is valid");
 				
-				if(name!=null && name.length()>3 && name.length()<40)
+				if(name!=null && name.length()>1 && name.length()<100)
 				{
 					System.out.println("name is valid");
 					
