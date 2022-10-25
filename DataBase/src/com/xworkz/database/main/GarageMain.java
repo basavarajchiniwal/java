@@ -9,7 +9,7 @@ public class GarageMain {
 	public static void main(String[] args) {
 		
 		
-		GarageDTO garageDTO=new GarageDTO(1,"Spare","Swaraj",1100);
+		GarageDTO garageDTO=new GarageDTO(2,"Spare","Swaraj",1100);
 		System.out.println(garageDTO);
 		
 		GarageService garage=new GarageServiceImpl();
