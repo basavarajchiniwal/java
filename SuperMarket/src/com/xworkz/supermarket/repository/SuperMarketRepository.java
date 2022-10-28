@@ -11,5 +11,20 @@ public interface SuperMarketRepository {
 	void displayByName(String name);
 	
 	void validateAndSave(List<SuperMarketDTO> dto);
+	
+	default SuperMarketDTO findByName(String name) {
+		return null;
+	}
+	
+	default SuperMarketDTO findById(int id) {
+		return null;
+	}
+	
+	List<SuperMarketDTO> findAll();
+	
+	List<SuperMarketDTO> findByType(String type);
+	
+	List<SuperMarketDTO> findByPincodeAndType(String type,int pincode);
+	
 
 }

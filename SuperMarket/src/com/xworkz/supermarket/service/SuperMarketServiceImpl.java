@@ -9,6 +9,8 @@ import com.xworkz.supermarket.repository.SuperMarketRepositoryImpl;
 public class SuperMarketServiceImpl  implements SuperMarketService{
 	
 
+	private SuperMarketRepository repository=new SuperMarketRepositoryImpl();
+
 	public SuperMarketServiceImpl() {
 		System.out.println("CheckOut" + this.getClass().getSimpleName());	
 	}
@@ -82,10 +84,34 @@ public class SuperMarketServiceImpl  implements SuperMarketService{
 
 	@Override
 	public void validateAndSave(List<SuperMarketDTO> dto) {
-		SuperMarketRepository rep=new SuperMarketRepositoryImpl();
-		
+		SuperMarketRepository rep=new SuperMarketRepositoryImpl();		
 	}
 	
+	@Override
+	public SuperMarketDTO findByName(String name) {
+		//SuperMarketRepository dtos=new SuperMarketRepositoryImpl();
+		//dtos.findByName(name);
+		return this.repository.findByName(name);
+	}
 	
+	@Override
+	public SuperMarketDTO findById(int id) {	
+		return this.repository.findById(id);
+	}
 
+	@Override
+	public List<SuperMarketDTO> findAll() {
+		return this.repository.findAll();
+	}
+	
+	@Override
+	public List<SuperMarketDTO> findByPincodeAndType(String type, int pincode) {
+		
+		return this.repository.findByPincodeAndType(type, pincode);
+	}
+
+	@Override
+	public List<SuperMarketDTO> findByType(String type) {
+		return this.repository.findByType(type);
+	}
 }
