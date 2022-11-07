@@ -21,7 +21,7 @@ public class MetroRepositoryImpl implements MetroRepository {
 		transaction.commit();
 		manager.close();
 		
-		return false;
+		return true;
 	}
 
 }
