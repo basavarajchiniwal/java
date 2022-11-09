@@ -1,10 +1,12 @@
 package com.xworkz.jpa.repo;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceException;
 
 import com.xworkz.jpa.entity.MovieEntity;
 import com.xworkz.jpa.util.JPAUtil;
@@ -18,15 +20,40 @@ public class MovieRepoImpl implements MovieRepo {
 
 		// factory=Persistence.createEntityManagerFactory("xworkz");
 		EntityManager manager = factory.createEntityManager();
+		EntityTransaction trans = manager.getTransaction();
 		try {
-			EntityTransaction trans = manager.getTransaction();
 			trans.begin();
 			manager.persist(entity);
 			trans.commit();
+		} catch (PersistenceException e) {
+			e.getStackTrace();
+			trans.rollback();
 		} finally {
 			manager.close();
 		}
 		return false;
+	}
+
+	@Override
+	public void save(List<MovieEntity> list) {
+
+		EntityManager manager = factory.createEntityManager();
+		EntityTransaction transaction = manager.getTransaction();
+		try {
+			transaction.begin();
+			for (MovieEntity movieEntity : list) {
+				manager.persist(movieEntity);
+			}
+			transaction.commit();
+			
+		} catch (PersistenceException per) {
+			per.getStackTrace();
+			transaction.rollback();
+
+		} finally {
+			manager.close();
+		}
+
 	}
 
 	@Override
@@ -63,38 +90,50 @@ public class MovieRepoImpl implements MovieRepo {
 
 		EntityManager manage = factory.createEntityManager();
 		EntityTransaction trans = manage.getTransaction();
-		trans.begin();
-		MovieEntity ent = manage.find(MovieEntity.class, id);
-		if (ent != null) {
-			System.out.println("Entity found" + ent);
-			ent.setName(name);
-			manage.persist(ent);
-			System.out.println("Name is updated");
+		try {
+			trans.begin();
+			MovieEntity ent = manage.find(MovieEntity.class, id);
+			if (ent != null) {
+				System.out.println("Entity found" + ent);
+				ent.setName(name);
+				manage.persist(ent);
+				System.out.println("Name is updated");
 
-		} else {
-			System.err.println("not updated");
+			} else {
+				System.err.println("not updated");
+				trans.commit();
+			}
+		} catch (PersistenceException e) {
+			e.getStackTrace();
+			trans.rollback();
 		}
-		trans.commit();
-		manage.close();
 
-		//this.updateNameById(id, name);
+		finally {
+			manage.close();
+		}
+
+		// this.updateNameById(id, name);
 	}
 
 	@Override
 	public void deleteById(int id) {
 
 		EntityManager manag = factory.createEntityManager();
+		EntityTransaction transaction = manag.getTransaction();
 		try {
-			EntityTransaction transaction = manag.getTransaction();
 			transaction.begin();
 			MovieEntity check = manag.find(MovieEntity.class, id);
 			if (check != null) {
 				manag.remove(check);
 				transaction.commit();
 				System.out.println("Deleted");
+
 			} else {
 				System.err.println("Not Deleted");
 			}
+		} catch (PersistenceException e) {
+			e.getStackTrace();
+			transaction.rollback();
 		} finally {
 			manag.close();
 		}

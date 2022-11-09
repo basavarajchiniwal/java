@@ -15,7 +15,7 @@ public interface HumanService {
 		this.findById(id);
 	}
 	
-	default void deleteLengthById(double length,int id)
+	default void deleteById(int id)
 	{
 		
 	}

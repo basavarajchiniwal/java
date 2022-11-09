@@ -1,5 +1,6 @@
 package com.xworkz.jpa.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.xworkz.jpa.entity.MovieEntity;
@@ -58,6 +59,12 @@ public class MovieServiceImpl implements MovieService {
 		}
 		
 		return false;
+	}
+	
+	@Override
+	public void save(List<MovieEntity> list) {
+		
+		this.repo.save(list);
 	}
 
 	@Override

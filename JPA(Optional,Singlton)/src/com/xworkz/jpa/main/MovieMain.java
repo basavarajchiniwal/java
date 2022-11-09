@@ -1,5 +1,7 @@
 package com.xworkz.jpa.main;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import com.xworkz.jpa.entity.MovieEntity;
@@ -14,7 +16,14 @@ public class MovieMain {
 		MovieEntity entity = new MovieEntity(1, "Thiru", "Dhanush", "Nithya Menen", "Vikram Krishna");
 		MovieEntity entity1 = new MovieEntity(2, "KGF-2", "Yash", "Srinidhi Shetty", "Vijay Kirgandur");
 		MovieEntity entity2 = new MovieEntity(3, "Ugramm", "Sri Murali", "Haripriya", "Pradeep Neel");
-		MovieEntity entity3 = new MovieEntity(4, "Kantara", "Rishab Shetty", "Sapthami Gowda", "Vijay Kirgandur");
+		MovieEntity entity3 = new MovieEntity(6, "Mocktail", "Rishab Shetty", "Sapthami Gowda", "Vijay Kirgandur");
+		
+		List<MovieEntity> list= new ArrayList<MovieEntity>();
+		list.add(entity);
+		list.add(entity1);
+		list.add(entity2);
+		list.add(entity3);
+		
 
 		MovieService service = new MovieServiceImpl();
 		try {

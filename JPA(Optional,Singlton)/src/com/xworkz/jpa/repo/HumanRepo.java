@@ -16,7 +16,7 @@ public interface HumanRepo {
 		this.findById(id);
 	}
 
-	default void deleteLengthById(double length,int id)
+	default void deleteById(int id)
 	{
 		
 	}

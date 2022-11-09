@@ -59,12 +59,12 @@ public class HumanServiceImpl implements HumanService {
 	}
 
 	@Override
-	public void deleteLengthById(double length, int id) {
+	public void deleteById(int id) {
 		
 		if(id>0)
 		{
-			this.repo.deleteLengthById(length, id);
+			this.repo.deleteById(id);
 		}
-		HumanService.super.deleteLengthById(length, id);
+		HumanService.super.deleteById(id);
 	}
 }

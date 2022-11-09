@@ -36,7 +36,7 @@ public class HumanMain {
 		
 		serv.updateNameById("Divya", 1);
 		
-		serv.deleteLengthById(154.02, 1);
+		serv.deleteById(1);
 		}
 		finally {
 			JPAUtil.getFactory().close();

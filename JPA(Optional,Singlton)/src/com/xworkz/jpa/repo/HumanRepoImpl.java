@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
 import javax.transaction.Transaction;
 
 import com.xworkz.jpa.entity.HumanEntity;
@@ -18,14 +19,20 @@ public class HumanRepoImpl implements HumanRepo {
 	@Override
 	public boolean save(HumanEntity entity) {
 
-		factory = Persistence.createEntityManagerFactory("xworkz");
 		EntityManager manager = factory.createEntityManager();
 		EntityTransaction trans = manager.getTransaction();
+		try {
 		trans.begin();
 		manager.persist(entity);
 		trans.commit();
+		}
+		catch(PersistenceException e) {
+			e.getStackTrace();
+			trans.rollback();
+		}
+		finally {
 		manager.close();
-
+		}
 		return false;
 	}
 
@@ -49,6 +56,7 @@ public class HumanRepoImpl implements HumanRepo {
 		
 		EntityManager manage=factory.createEntityManager();
 		EntityTransaction trans=manage.getTransaction();
+		try {
 		trans.begin();
 		HumanEntity humanEntity=manage.find(HumanEntity.class, id);
 		if(humanEntity != null) {
@@ -63,15 +71,24 @@ public class HumanRepoImpl implements HumanRepo {
 			System.err.println("entity not found"+ id);
 		}
 		trans.commit();
+		}
+		catch(PersistenceException e) {
+			e.getStackTrace();
+			trans.rollback();
+		}
+		finally {
+			manage.close();
+		}
 		
 		HumanRepo.super.updateNameById(name, id);
 	}
 	
 	@Override
-	public void deleteLengthById(double length, int id) {
+	public void deleteById(int id) {
 		
 		EntityManager manager=factory.createEntityManager();
 		EntityTransaction transaction=manager.getTransaction();
+		try {
 		transaction.begin();
 		HumanEntity entity=manager.find(HumanEntity.class, id);
 		if(entity != null)
@@ -85,21 +102,16 @@ public class HumanRepoImpl implements HumanRepo {
 			System.err.println("length is not deleted");
 		}
 		transaction.commit();
-		
-		HumanRepo.super.deleteLengthById(length, id);
+		}
+		catch(PersistenceException e) {
+			e.getStackTrace();
+			transaction.rollback();
+		}
+		finally {
+			manager.close();
+		}
+		HumanRepo.super.deleteById(id);
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
